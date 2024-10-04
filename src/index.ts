@@ -1,5 +1,4 @@
 import cookie from "cookie-parser";
-import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import path from "path";
 import ConnectDB from "./config/DB";
@@ -8,7 +7,6 @@ import { profileRoutes } from "./routes/profileRouts";
 import { userRoutes } from "./routes/userRoutes";
 
 const app = express();
-dotenv.config();
 
 // Middleware for parsing JSON request bodies
 app.use(express.json());
@@ -50,7 +48,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     .status(500)
     .json({ message: "Internal Server Error", error: err.message });
 });
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+const PORT = Bun.env.PORT || 3000;
 console.log(PORT);
 
 app.listen(PORT, () => {
