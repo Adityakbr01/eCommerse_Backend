@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <!-- Tailwind CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <% if (user) { %>
+    <div class="container mx-auto max-w-md p-6 bg-white rounded-lg shadow-lg">
+      <h1 class="text-2xl font-semibold text-center mb-6">User Profile</h1>
+      <div class="mb-4">
+        <h2 class="text-lg font-medium text-gray-800">Welcome Back!</h2>
+        <p class="text-gray-600"><%= user.name %></p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">User ID:</label>
+        <p id="user-id" class="mt-1 text-gray-800"><%= user._id %></p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Email:</label>
+        <p id="user-email" class="mt-1 text-gray-800"><%= user.email %></p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700"
+          >Joined On:</label
+        >
+        <p id="user-joined" class="mt-1 text-gray-800">
+          <%= user.createdAt.toLocaleDateString() %>
+        </p>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="/logout" class="text-blue-600 hover:underline">Logout</a>
+      </div>
+    </div>
+    <% } else { %>
+    <div
+      class="container mx-auto max-w-md p-6 bg-white rounded-lg shadow-lg text-center"
+    >
+      <h2 class="text-lg font-medium text-gray-800">User Not Found</h2>
+    </div>
+    <% } %>
+  </body>
+</html>
