@@ -20,7 +20,7 @@ userRoutes.get("/register", (req, res) => {
   // Verify JWT token
   jwt.verify(
     token,
-    "process.env.JWT_SECRET" as string,
+    Bun.env.JWT_SECRET as string,
     (err: VerifyErrors | null) => {
       if (err) {
         return res.render("register");
@@ -45,7 +45,7 @@ userRoutes.get("/login", (req, res) => {
   // Verify JWT token
   jwt.verify(
     token,
-    "process.env.JWT_SECRET" as string,
+    Bun.env.JWT_SECRET as string,
     (err: VerifyErrors | null) => {
       if (err) {
         return res.render("login");

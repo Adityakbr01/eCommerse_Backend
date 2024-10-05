@@ -28,7 +28,7 @@ export const registerUser = async (
           });
           const Token = jwt.sign(
             { id: NewUser._id },
-            "process.env.JWT_SECRET" as string,
+            Bun.env.JWT_SECRET as string,
             {
               expiresIn: "1h",
             }
@@ -64,13 +64,9 @@ export const loginUser = async (req: Request, res: Response) => {
         res.status(400).json({ message: "Invalid credentials" });
       }
       res.clearCookie("token");
-      const token = jwt.sign(
-        { id: user._id },
-        "process.env.JWT_SECRET" as string,
-        {
-          expiresIn: "1h",
-        }
-      );
+      const token = jwt.sign({ id: user._id }, Bun.env.JWT_SECRET as string, {
+        expiresIn: "1h",
+      });
       res.cookie("token", token);
       res.redirect("/api/v1/user/profile");
       setTimeout(() => {

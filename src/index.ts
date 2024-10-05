@@ -5,6 +5,7 @@ import ConnectDB from "./config/DB";
 import { isAuthenticate } from "./middlewares/isAutheniticate";
 import { profileRoutes } from "./routes/profileRouts";
 import { userRoutes } from "./routes/userRoutes";
+import { productRoutes } from "./routes/productRouts";
 
 const app = express();
 
@@ -35,6 +36,9 @@ app.get("/logout", (req, res) => {
   res.redirect("/api/v1/auth/login");
 });
 app.use("/api/v1/user", isAuthenticate, profileRoutes);
+
+//Procts Route
+app.use("/api/v1/products", productRoutes);
 
 // 404 Route Handler (Catch-all for undefined routes)
 app.use((req, res, next) => {

@@ -1,31 +1,32 @@
-import express, { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import user from "../models/user";
 
-export const Profile = async (req: Request, res: Response): Promise<any> => {
+// Middleware to check if user is an admin
+export const IsAdmin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<any> => {
   try {
-    // Check if token exists in cookies
     const token = req.cookies.token;
-
     if (!token) {
       return res.status(401).send("Unauthorized: No token provided");
     }
-
-    // Verify the token (ensure type correctness)
-    const decoded = jwt.verify(token, Bun.env.JWT_SECRET);
-
-    // Check if the decoded token is an object and has an 'id' property
+    const decoded = jwt.verify(token, Bun.env.JWT_SECRET as string);
     if (typeof decoded === "object" && (decoded as JwtPayload).id) {
       const userId = (decoded as JwtPayload).id;
       const findUser = await user.findById(userId);
-      console.log(findUser);
-
-      res.render("profile", { user: findUser });
+      if (!findUser) return res.status(400).send("Invalid token payload");
+      if (findUser.role === Bun.env.ROLE_ADMIN) {
+        next();
+      } else {
+        res.status(401).send("Unauthorized: User is not an admin");
+      }
     } else {
       return res.status(400).send("Invalid token payload");
     }
   } catch (error) {
-    // Handle errors gracefully
     console.error(error);
     return res.status(401).send("Invalid token or session expired");
   }
