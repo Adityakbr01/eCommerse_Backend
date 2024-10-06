@@ -36,7 +36,9 @@ export const registerUser = async (
 
           console.log(Token);
           res.cookie("token", Token);
-          res.status(201).redirect(`/api/v1/user/profile`);
+          res.status(201).send({
+            message: "User created successfully",
+          });
         });
       });
     } else {
