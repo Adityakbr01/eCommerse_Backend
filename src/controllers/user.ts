@@ -46,6 +46,7 @@ export const registerUser = async (
     } else {
       res.status(400).send({
         message: "User already exists please Login",
+        user: [name, email, existingUser._id],
       });
       res.clearCookie("token");
     }
