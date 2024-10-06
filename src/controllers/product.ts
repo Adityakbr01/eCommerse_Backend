@@ -32,13 +32,13 @@ export const CreateProduct = async (
       textColor,
     } = req.body;
     if (
-      !name &&
-      !description &&
-      !price &&
-      !category &&
-      !image &&
-      !topBG &&
-      !bottomBG &&
+      !name ||
+      !description ||
+      !price ||
+      !category ||
+      !image ||
+      !topBG ||
+      !bottomBG ||
       !textColor
     )
       return res.send("Please add all required fields");
