@@ -12,7 +12,7 @@ export const Profile = async (req: Request, res: Response): Promise<any> => {
     }
 
     // Verify the token (ensure type correctness)
-    const decoded = jwt.verify(token, Bun.env.JWT_SECRET);
+    const decoded = jwt.verify(token, Bun.env.JWT_SECRET as string);
 
     // Check if the decoded token is an object and has an 'id' property
     if (typeof decoded === "object" && (decoded as JwtPayload).id) {
@@ -20,7 +20,10 @@ export const Profile = async (req: Request, res: Response): Promise<any> => {
       const findUser = await user.findById(userId);
       console.log(findUser);
 
-      res.render("profile", { user: findUser });
+      res.send({
+        message: "Profile fetched successfully",
+        user: findUser,
+      });
     } else {
       return res.status(400).send("Invalid token payload");
     }
