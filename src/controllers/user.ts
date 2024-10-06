@@ -43,7 +43,9 @@ export const registerUser = async (
         });
       });
     } else {
-      res.status(400).json({ message: "User already exists please Login" });
+      res.status(400).send({
+        message: "User already exists please Login",
+      });
       res.clearCookie("token");
     }
   } catch (error) {
