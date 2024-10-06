@@ -39,6 +39,7 @@ export const registerUser = async (
           res.status(201).send({
             message: "User created successfully",
             user: NewUser,
+            Token,
           });
         });
       });
