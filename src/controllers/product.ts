@@ -6,7 +6,10 @@ export const Products = async (req: Request, res: Response) => {
     const allProducts = await product.find({});
 
     // Pass the products to the EJS view
-    res.render("allProducts", { products: allProducts });
+    // res.render("allProducts", { products: allProducts });
+    //pass Data
+
+    res.status(200).json({ allProducts });
   } catch (error) {
     console.error("Error fetching products: ", error);
     res.status(500).json({ message: "Server error" });

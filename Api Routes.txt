@@ -1,0 +1,11 @@
+For User Register
+https://ecommerse-backend-4h3c.onrender.com/api/v1/auth/register
+
+For User Login
+https://ecommerse-backend-4h3c.onrender.com/api/v1/auth/login
+
+For User Profile
+https://ecommerse-backend-4h3c.onrender.com/api/v1/user/profile
+
+for all Products
+https://ecommerse-backend-4h3c.onrender.com/api/v1/products
