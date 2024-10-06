@@ -38,6 +38,7 @@ export const registerUser = async (
           res.cookie("token", Token);
           res.status(201).send({
             message: "User created successfully",
+            user: NewUser,
           });
         });
       });
