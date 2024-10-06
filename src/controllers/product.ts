@@ -65,7 +65,7 @@ export const CreateProduct = async (
       bottomBG,
       textColor,
     });
-    NewProduct.save();
+    // NewProduct.save();
     res.status(200).json(NewProduct);
   } catch (error) {
     console.error("Error creating product: ", error);
