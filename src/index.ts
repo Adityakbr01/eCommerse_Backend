@@ -6,6 +6,7 @@ import { isAuthenticate } from "./middlewares/isAutheniticate";
 import { profileRoutes } from "./routes/profileRouts";
 import { userRoutes } from "./routes/userRoutes";
 import { productRoutes } from "./routes/productRouts";
+import cors from "cors";
 
 const app = express();
 
@@ -13,6 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookie());
+app.use(cors());
 // Set the view engine to EJS
 app.set("view engine", "ejs");
 
