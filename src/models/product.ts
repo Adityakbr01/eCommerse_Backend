@@ -8,6 +8,9 @@ export interface IProduct extends Document {
   category: "mobile" | "clothes" | "electronics" | "furniture";
   image: string;
   state: "shipped" | "pending" | "delivered";
+  topBG: string;
+  bottomBG: string;
+  textColor: string;
 }
 
 // Define the schema for the product
@@ -25,6 +28,18 @@ const productSchema: Schema = new mongoose.Schema({
     type: String,
     enum: ["shipped", "pending", "delivered"], // Enum for states
     default: "shipped",
+  },
+  topBG: {
+    required: true,
+    type: String,
+  },
+  bottomBG: {
+    required: true,
+    type: String,
+  },
+  textColor: {
+    required: true,
+    type: String,
   },
 });
 export default mongoose.model<IProduct>("Product", productSchema);

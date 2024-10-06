@@ -21,8 +21,26 @@ export const CreateProduct = async (
   res: Response
 ): Promise<any> => {
   try {
-    const { name, description, price, category, image } = req.body;
-    if (!name || !description || !price || !category || !image)
+    const {
+      name,
+      description,
+      price,
+      category,
+      image,
+      topBG,
+      bottomBG,
+      textColor,
+    } = req.body;
+    if (
+      !name &&
+      !description &&
+      !price &&
+      !category &&
+      !image &&
+      !topBG &&
+      !bottomBG &&
+      !textColor
+    )
       return res.send("Please add all required fields");
     if (price < 0) return res.send("Price cannot be negative");
 
@@ -43,6 +61,9 @@ export const CreateProduct = async (
       price,
       category,
       image,
+      topBG,
+      bottomBG,
+      textColor,
     });
     NewProduct.save();
     res.status(200).json(NewProduct);
