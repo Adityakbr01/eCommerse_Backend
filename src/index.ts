@@ -11,11 +11,14 @@ import cors from "cors";
 const app = express();
 
 // Middleware for parsing JSON request bodies
+
 app.use(
   cors({
-    credentials: true,
+    origin: "*", // Replace with your frontend URL
+    credentials: true, // Allow credentials (cookies) to be sent
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookie());

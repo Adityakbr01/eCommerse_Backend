@@ -14,14 +14,14 @@ export const isAuthenticate = (
   // Verify JWT token
   jwt.verify(
     token,
-    Bun.env.JWT_SECRET,
+    Bun.env.JWT_SECRET as string,
     (err: VerifyErrors | null, decoded: any) => {
       if (err) {
         return res.send("Unauthorized: Invalid token");
       }
 
       // Agar decoded token mil jata hai, hum token ko refresh karenge (naya token create karenge)
-      const refreshedToken = jwt.sign({ id: decoded.id }, Bun.env.JWT_SECRET, {
+      const refreshedToken = jwt.sign({ id: decoded.id }, Bun.env.JWT_SECRET as string, {
         expiresIn: "1h",
       });
 
